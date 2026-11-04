@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Cobra hasta 60 meses de renta por adelantado, sin préstamo y sin riesgo de impago.">
+<title>Rental Advance — Mira el vídeo y agenda tu llamada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0A1E3C; --navy-2:#11305C; --blue:#2E86F5; --blue-deep:#1A63C9; --ice:#EAF2FC;
+  --bg:#F6F9FD; --surface:#FFFFFF; --text:#0A1E3C; --muted:#4F6280; --line:#D8E2F0;
+  --ok:#1E9E6A; --no:#C2413A;
+  --radius-lg:22px; --radius:14px; --radius-sm:10px;
+  color-scheme: light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#07152B; --surface:#0E2445; --text:#E9F0FA; --muted:#9CB0CC; --line:#1F3B63; --ice:#12305A;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{ --bg:#07152B; --surface:#0E2445; --text:#E9F0FA; --muted:#9CB0CC; --line:#1F3B63; --ice:#12305A; color-scheme: dark; }
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth; scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation:none!important; transition:none!important} }
+body{margin:0; background:var(--bg); color:var(--text); font-family:"Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif; font-size:17px; line-height:1.55; -webkit-font-smoothing:antialiased}
+img,video{max-width:100%; display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--blue); outline-offset:3px; border-radius:6px}
+.wrap{width:min(1120px, 100% - 40px); margin-inline:auto}
+.narrow{width:min(760px, 100% - 40px); margin-inline:auto}
+
+/* ---------- Top ---------- */
+.top{background:var(--navy); color:#fff}
+.top .wrap{display:flex; align-items:center; justify-content:space-between; padding:18px 0}
+.logo{display:flex; align-items:center; gap:10px; font-weight:800; font-size:20px; letter-spacing:-.02em; text-decoration:none}
+.logo-mark{width:30px; height:30px; border-radius:8px; background:var(--blue); display:grid; place-items:center}
+.top-phone{font-size:14px; color:#B9CCE8; text-decoration:none}
+.top-phone strong{color:#fff; font-weight:600}
+
+/* ---------- Hero ---------- */
+.hero{background:
+  radial-gradient(900px 420px at 50% 115%, rgba(46,134,245,.35), transparent 70%),
+  linear-gradient(180deg, var(--navy) 0%, #0C2647 100%);
+  color:#fff; padding:28px 0 72px; position:relative; overflow:hidden}
+.hero::before{content:""; position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size:48px 48px; mask-image:linear-gradient(180deg, transparent, #000 30%, #000 70%, transparent); pointer-events:none}
+.hero .wrap{position:relative; text-align:center}
+.ticker{display:inline-flex; align-items:stretch; border-radius:6px; overflow:hidden; font-size:14px; margin-bottom:26px; box-shadow:0 0 0 1px rgba(255,255,255,.12)}
+.ticker b{background:var(--blue); padding:6px 10px; font-weight:700; display:flex; align-items:center; gap:6px}
+.ticker b::before{content:""; width:7px; height:7px; border-radius:50%; background:#fff; animation:pulse 1.6s infinite}
+.ticker span{background:rgba(255,255,255,.08); padding:6px 12px; color:#D5E2F5}
+@keyframes pulse{50%{opacity:.25}}
+h1{font-size:clamp(32px, 5.4vw, 60px); line-height:1.04; letter-spacing:-.035em; font-weight:800; margin:0 auto 18px; max-width:20ch; text-wrap:balance}
+.hero-sub{font-size:clamp(17px, 2vw, 20px); color:#C3D3EA; max-width:58ch; margin:0 auto 34px; text-wrap:pretty}
+
+.player{position:relative; max-width:900px; margin:0 auto; border-radius:var(--radius-lg); overflow:hidden; background:#000; aspect-ratio:16/9;
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.1)}
+.player video{width:100%; height:100%; object-fit:cover}
+.play-cover{position:absolute; inset:0; border:0; padding:0; cursor:pointer; background:transparent; color:#fff; display:grid; place-items:center}
+.play-cover img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.55)}
+.play-inner{position:relative; display:grid; justify-items:center; gap:14px}
+.play-btn{width:92px; height:92px; border-radius:50%; background:var(--blue); display:grid; place-items:center; box-shadow:0 0 0 12px rgba(46,134,245,.25); transition:transform .2s}
+.play-cover:hover .play-btn{transform:scale(1.06)}
+.play-label{font-weight:700; font-size:18px; text-shadow:0 2px 12px rgba(0,0,0,.5)}
+.play-label small{display:block; font-weight:500; font-size:14px; color:#D5E2F5}
+.sound-hint{position:absolute; top:14px; left:14px; background:rgba(10,30,60,.8); font-size:13px; padding:6px 10px; border-radius:8px}
+.progress{height:4px; background:rgba(255,255,255,.12); max-width:900px; margin:0 auto; border-radius:0 0 4px 4px; overflow:hidden}
+.progress i{display:block; height:100%; width:0; background:var(--blue); transition:width .3s linear}
+
+.cta{display:inline-flex; align-items:center; justify-content:center; gap:10px; background:var(--blue); color:#fff; font:inherit; font-weight:700; font-size:18px; border:0; border-radius:999px; padding:18px 34px; cursor:pointer; text-decoration:none; transition:background .2s, transform .2s; box-shadow:0 12px 30px -10px rgba(46,134,245,.7)}
+.cta:hover{background:var(--blue-deep)}
+.cta svg{flex:none}
+.hero-cta{margin-top:36px; display:grid; justify-items:center; gap:12px}
+.hero-cta p{margin:0; font-size:14px; color:#9FB5D6}
+
+/* ---------- Press ---------- */
+.press{border-bottom:1px solid var(--line); background:var(--surface)}
+.press .wrap{display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:14px 44px; padding:22px 0; color:var(--muted)}
+.press small{font-size:14px}
+.press b{font-weight:700; font-size:18px; letter-spacing:-.01em; opacity:.75}
+.press .serif{font-family:Georgia, "Times New Roman", serif; font-style:italic}
+
+/* ---------- Sections ---------- */
+section.block{padding:96px 0}
+h2{font-size:clamp(28px, 3.8vw, 44px); line-height:1.08; letter-spacing:-.03em; font-weight:800; margin:0 0 16px; text-wrap:balance}
+.lead{color:var(--muted); font-size:19px; max-width:60ch; margin:0 0 48px}
+.center{text-align:center}
+.center .lead, .lead.center{margin-inline:auto}
+
+/* scale / contrast */
+.scale{display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--line); border-radius:var(--radius-lg); overflow:hidden; background:var(--surface)}
+.scale > div{padding:36px}
+.scale .without{border-right:1px solid var(--line)}
+.scale .with{background:var(--navy); color:#fff}
+.scale h3{margin:0 0 22px; font-size:22px; letter-spacing:-.02em}
+.scale ul{list-style:none; margin:0; padding:0; display:grid; gap:18px}
+.scale li{display:grid; grid-template-columns:26px 1fr; gap:12px; align-items:start}
+.scale li span{color:var(--muted)}
+.scale .with li span{color:#B9CCE8}
+.scale li strong{display:block; font-weight:700}
+.ico{width:26px; height:26px; border-radius:50%; display:grid; place-items:center; margin-top:2px}
+.ico.no{background:rgba(194,65,58,.12); color:var(--no)}
+.ico.ok{background:rgba(46,134,245,.25); color:#8FC0FF}
+
+/* fit */
+.fit{display:grid; grid-template-columns:1.15fr .85fr; gap:24px}
+.fit-card{border-radius:var(--radius-lg); padding:34px; background:var(--surface); border:1px solid var(--line)}
+.fit-card.yes{border:2px solid var(--blue)}
+.fit-card h3{margin:0 0 18px; font-size:20px}
+.fit-card ul{margin:0; padding:0; list-style:none; display:grid; gap:12px}
+.fit-card li{padding-left:30px; position:relative}
+.fit-card li::before{content:""; position:absolute; left:0; top:4px; width:18px; height:18px; border-radius:50%}
+.fit-card.yes li::before{background:var(--blue) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E") center/11px no-repeat}
+.fit-card.nope li{color:var(--muted)}
+.fit-card.nope li::before{background:var(--line) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234F6280' stroke-width='3.5'%3E%3Cpath d='M6 6l12 12M18 6L6 18'/%3E%3C/svg%3E") center/9px no-repeat}
+
+/* steps */
+.steps-sec{background:var(--ice)}
+.steps{display:grid; grid-template-columns:repeat(3,1fr); gap:0; counter-reset:s; position:relative}
+.step{padding:0 28px 0 0; position:relative}
+.step::before{counter-increment:s; content:counter(s); display:grid; place-items:center; width:52px; height:52px; border-radius:50%; background:var(--navy); color:#fff; font-weight:800; font-size:20px; margin-bottom:22px; position:relative; z-index:1}
+.steps::before{content:""; position:absolute; top:26px; left:26px; right:33%; height:2px; background:repeating-linear-gradient(90deg, var(--blue) 0 8px, transparent 8px 16px)}
+.step h3{margin:0 0 8px; font-size:21px; letter-spacing:-.02em}
+.step p{margin:0; color:var(--muted)}
+
+/* reviews */
+.reviews{display:grid; grid-template-columns:repeat(3,1fr); gap:20px}
+.review{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:26px; display:flex; flex-direction:column; gap:14px}
+.review:nth-child(2){transform:translateY(24px)}
+.stars{color:#F5B400; letter-spacing:2px; font-size:15px}
+.review blockquote{margin:0; font-size:17px}
+.review footer{margin-top:auto; display:flex; align-items:center; gap:10px; font-size:15px}
+.avatar{width:36px; height:36px; border-radius:50%; background:var(--ice); color:var(--blue-deep); display:grid; place-items:center; font-weight:800; font-size:14px}
+.review footer small{display:block; color:var(--muted); font-size:13px}
+
+/* ---------- Form ---------- */
+.book{background:linear-gradient(180deg, var(--navy), #0C2647); color:#fff}
+.book-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:56px; align-items:start}
+.book h2{color:#fff}
+.book .lead{color:#B9CCE8}
+.book-points{list-style:none; margin:0; padding:0; display:grid; gap:14px; color:#D5E2F5}
+.book-points li{display:flex; gap:12px}
+.book-points svg{flex:none; margin-top:3px}
+.agent{margin-top:36px; display:flex; gap:14px; align-items:center; padding:16px; border-radius:var(--radius); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1)}
+.agent img{width:56px; height:56px; border-radius:50%; object-fit:cover; object-position:50% 20%}
+.agent p{margin:0; font-size:15px; color:#C3D3EA}
+.agent strong{color:#fff; display:block}
+
+.form{background:var(--surface); color:var(--text); border-radius:var(--radius-lg); padding:32px; box-shadow:0 30px 80px -30px rgba(0,0,0,.6)}
+.form-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; font-size:14px; color:var(--muted)}
+.bar{height:6px; border-radius:6px; background:var(--ice); overflow:hidden; margin-bottom:28px}
+.bar i{display:block; height:100%; width:16%; background:var(--blue); border-radius:6px; transition:width .35s ease}
+.q{display:none}
+.q.active{display:block; animation:in .3s ease}
+@keyframes in{from{opacity:0; transform:translateY(8px)}}
+.q h3{font-size:24px; letter-spacing:-.02em; line-height:1.2; margin:0 0 6px}
+.q .hint{color:var(--muted); margin:0 0 22px; font-size:15px}
+.opts{display:grid; gap:10px}
+.opt{display:flex; align-items:center; gap:14px; width:100%; text-align:left; font:inherit; color:inherit; background:var(--bg); border:1.5px solid var(--line); border-radius:var(--radius-sm); padding:15px 16px; cursor:pointer; transition:border-color .15s, background .15s}
+.opt:hover{border-color:var(--blue)}
+.opt[aria-pressed="true"]{border-color:var(--blue); background:color-mix(in srgb, var(--blue) 10%, var(--surface))}
+.opt .k{flex:none; width:28px; height:28px; border-radius:8px; border:1.5px solid var(--line); display:grid; place-items:center; font-size:13px; font-weight:700; color:var(--muted)}
+.opt[aria-pressed="true"] .k{background:var(--blue); border-color:var(--blue); color:#fff}
+.opt small{display:block; color:var(--muted); font-size:14px}
+.fields{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+.fields .full{grid-column:1/-1}
+label.f{display:grid; gap:6px; font-size:14px; font-weight:600}
+label.f input{font:inherit; font-weight:400; color:var(--text); background:var(--bg); border:1.5px solid var(--line); border-radius:var(--radius-sm); padding:13px 14px}
+label.f input:focus{outline:none; border-color:var(--blue)}
+.check{display:flex; gap:10px; align-items:flex-start; font-size:14px; color:var(--muted); margin-top:4px}
+.check input{margin-top:4px; accent-color:var(--blue)}
+.err{color:var(--no); font-size:14px; min-height:20px; margin:10px 0 0}
+.nav{display:flex; justify-content:space-between; align-items:center; margin-top:22px}
+.back{background:none; border:0; font:inherit; color:var(--muted); cursor:pointer; padding:8px 0}
+.back[hidden]{visibility:hidden; display:block}
+.form .cta{font-size:16px; padding:15px 26px; box-shadow:none}
+.days{display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin-bottom:16px}
+.day{font:inherit; color:inherit; background:var(--bg); border:1.5px solid var(--line); border-radius:var(--radius-sm); padding:10px 4px; cursor:pointer; text-align:center; line-height:1.2}
+.day b{display:block; font-size:20px}
+.day small{font-size:12px; color:var(--muted)}
+.day[aria-pressed="true"], .slot[aria-pressed="true"]{background:var(--blue); border-color:var(--blue); color:#fff}
+.day[aria-pressed="true"] small{color:#E3EEFF}
+.slots{display:grid; grid-template-columns:repeat(4,1fr); gap:8px}
+.slot{font:inherit; font-size:15px; color:inherit; background:var(--bg); border:1.5px solid var(--line); border-radius:var(--radius-sm); padding:10px 0; cursor:pointer}
+.slot:disabled{opacity:.35; cursor:not-allowed; text-decoration:line-through}
+.done{text-align:center; padding:10px 0}
+.done .big{width:72px; height:72px; border-radius:50%; background:rgba(30,158,106,.12); color:var(--ok); display:grid; place-items:center; margin:0 auto 18px}
+.done p{color:var(--muted)}
+.summary{background:var(--bg); border-radius:var(--radius); padding:16px; text-align:left; font-size:15px; display:grid; gap:6px; margin-top:18px}
+.summary div{display:flex; justify-content:space-between; gap:12px}
+.summary span{color:var(--muted)}
+
+/* FAQ */
+.faq details{border-bottom:1px solid var(--line); padding:4px 0}
+.faq summary{list-style:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:16px; padding:20px 0; font-weight:700; font-size:19px; letter-spacing:-.01em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+"; font-size:26px; font-weight:400; color:var(--blue); transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{margin:0 0 22px; color:var(--muted); max-width:65ch}
+
+/* footer */
+.foot{background:var(--navy); color:#9FB5D6; font-size:14px; padding:40px 0}
+.foot .wrap{display:flex; flex-wrap:wrap; justify-content:space-between; gap:18px; align-items:center}
+.foot nav{display:flex; flex-wrap:wrap; gap:18px}
+.foot a{text-decoration:none}
+.foot a:hover{color:#fff}
+
+/* sticky mobile cta */
+.sticky{position:fixed; left:0; right:0; bottom:0; padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px)); background:rgba(10,30,60,.94); backdrop-filter:blur(10px); display:none; z-index:20; transform:translateY(110%); transition:transform .3s}
+.sticky.show{transform:none}
+.sticky .cta{width:100%; font-size:16px; padding:15px}
+
+@media (max-width:860px){
+  .scale, .fit, .book-grid{grid-template-columns:1fr}
+  .scale .without{border-right:0; border-bottom:1px solid var(--line)}
+  .reviews{grid-template-columns:1fr}
+  .review:nth-child(2){transform:none}
+  .steps{grid-template-columns:1fr; gap:34px}
+  .steps::before{top:26px; bottom:60px; left:25px; right:auto; width:2px; height:auto; background:repeating-linear-gradient(180deg, var(--blue) 0 8px, transparent 8px 16px)}
+  .step{display:grid; grid-template-columns:52px 1fr; column-gap:20px; padding:0}
+  .step::before{margin:0; grid-row:span 2}
+  section.block{padding:72px 0}
+  .sticky{display:block}
+  .top-phone span{display:none}
+}
+@media (max-width:520px){
+  .fields{grid-template-columns:1fr}
+  .form{padding:24px 20px}
+  .slots{grid-template-columns:repeat(3,1fr)}
+  .play-btn{width:72px; height:72px}
+  .ticker span{display:none}
+  .scale > div, .fit-card{padding:26px}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#" aria-label="Rental Advance">
+      <span class="logo-mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M6 10v10h12V10"/></svg></span>
+      Rental Advance
+    </a>
+    <a class="top-phone" href="tel:+34722833511"><span>¿Prefieres llamar? </span><strong>722 833 511</strong></a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="ticker"><b>Para propietarios</b><span>Con un piso alquilado y contrato en vigor</span></div>
+    <h1>Tu inquilino está protegido por ley. ¿Y quién te protege a ti?</h1>
+    <p class="hero-sub">Mira este vídeo de 3 minutos antes de hablar con nosotros. Te contamos cómo cobrar hasta 60 meses de renta por adelantado, sin préstamo y sin cargar tú con el riesgo de un impago.</p>
+
+    <div class="player" id="player">
+      <video id="vsl" playsinline preload="metadata" poster="assets/poster.jpg">
+        <source src="assets/vsl.mp4" type="video/mp4">
+      </video>
+      <button class="play-cover" id="playCover" aria-label="Reproducir el vídeo">
+        <img src="assets/poster.jpg" alt="">
+        <span class="sound-hint">🔊 Activa el sonido</span>
+        <span class="play-inner">
+          <span class="play-btn"><svg width="34" height="34" viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></span>
+          <span class="play-label">Ver el vídeo<small>3 min 36 s</small></span>
+        </span>
+      </button>
+    </div>
+    <div class="progress" aria-hidden="true"><i id="prog"></i></div>
+
+    <div class="hero-cta">
+      <a class="cta" href="#agenda">Agenda tu llamada
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </a>
+      <p>Llamada de 15 minutos con un asesor, sin compromiso</p>
+    </div>
+  </div>
+</section>
+
+<div class="press">
+  <div class="wrap">
+    <small>Han hablado de nosotros</small>
+    <b class="serif">La Razón</b>
+    <b>Europa Press</b>
+    <b class="serif">El Confidencial Digital</b>
+    <b>Por Metro Cuadrado</b>
+  </div>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <h2>Alquilar un piso hoy es cobrar poco a poco y asumir todo el riesgo</h2>
+    <p class="lead">Las rentas llegan mes a mes, pero los gastos, las derramas y los impagos llegan cuando quieren. Esto es lo que cambia con Rental Advance.</p>
+    <div class="scale">
+      <div class="without">
+        <h3>Como propietario, hoy</h3>
+        <ul>
+          <li><span class="ico no"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M6 6l12 12M18 6L6 18"/></svg></span><div><strong>Si el inquilino deja de pagar, el problema es tuyo</strong><span>Reclamaciones, abogados y meses sin cobrar.</span></div></li>
+          <li><span class="ico no"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M6 6l12 12M18 6L6 18"/></svg></span><div><strong>Tu dinero está bloqueado en el piso</strong><span>Lo recibes a cuentagotas, aunque lo necesites ahora.</span></div></li>
+          <li><span class="ico no"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M6 6l12 12M18 6L6 18"/></svg></span><div><strong>Para tener liquidez, te toca endeudarte</strong><span>Un préstamo que suma cuotas y aparece en tu CIRBE.</span></div></li>
+        </ul>
+      </div>
+      <div class="with">
+        <h3>Con Rental Advance</h3>
+        <ul>
+          <li><span class="ico ok"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M5 12l5 5 9-10"/></svg></span><div><strong>Seguro de impago del 100% durante 12 meses</strong><span>Nosotros reclamamos y, si hace falta, gestionamos el desahucio.</span></div></li>
+          <li><span class="ico ok"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M5 12l5 5 9-10"/></svg></span><div><strong>Hasta 60 meses de renta en tu cuenta</strong><span>Normalmente pocos días después de firmar.</span></div></li>
+          <li><span class="ico ok"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M5 12l5 5 9-10"/></svg></span><div><strong>No es un préstamo</strong><span>Sin cuotas, sin deuda y sin consumir riesgo bancario.</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="padding-top:0">
+  <div class="wrap">
+    <h2>Antes de agendar, comprueba si encajas</h2>
+    <p class="lead">Preferimos que la llamada te sirva de verdad. Estos son los casos en los que podemos ayudarte.</p>
+    <div class="fit">
+      <div class="fit-card yes">
+        <h3>La llamada es para ti si…</h3>
+        <ul>
+          <li>Eres propietario de una vivienda, local o nave que ya está alquilada.</li>
+          <li>Tienes un contrato de alquiler en vigor y el inquilino paga con normalidad.</li>
+          <li>Quieres liquidez para invertir, reformar, cancelar deuda o cubrir un imprevisto.</li>
+          <li>Te gustaría olvidarte de la gestión y del riesgo de impago.</li>
+        </ul>
+      </div>
+      <div class="fit-card nope">
+        <h3>No es para ti si…</h3>
+        <ul>
+          <li>El inmueble está vacío o aún no tienes inquilino.</li>
+          <li>Buscas un préstamo personal o una hipoteca.</li>
+          <li>Eres inquilino y buscas piso.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block steps-sec">
+  <div class="wrap">
+    <h2>Cómo funciona</h2>
+    <p class="lead">Tres pasos desde la llamada hasta tener el dinero en tu cuenta.</p>
+    <div class="steps">
+      <div class="step"><h3>Hablamos 15 minutos</h3><p>Un asesor revisa tu caso contigo y te dice cuánto podrías adelantar.</p></div>
+      <div class="step"><h3>Validamos la documentación</h3><p>Contrato de alquiler, nota simple y datos del inquilino. Del resto nos ocupamos nosotros.</p></div>
+      <div class="step"><h3>Firmas y recibes tu anticipo</h3><p>El dinero llega a tu cuenta, normalmente en pocos días tras la firma.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2 class="center">Propietarios que ya lo han hecho</h2>
+    <p class="lead center">Reseñas reales de Google.</p>
+    <div class="reviews">
+      <article class="review">
+        <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
+        <blockquote>«Andábamos muy perdidos… Necesitaba un dinero extra que no conseguía por ningún otro lado y, gracias a tener un piso alquilado, pude obtenerlo.»</blockquote>
+        <footer><span class="avatar">MR</span><div>María del Mar R.<small>Propietaria</small></div></footer>
+      </article>
+      <article class="review">
+        <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
+        <blockquote>«La manera más fácil de capitalizar tus rentas futuras. Así puedes invertir sin necesidad de solicitar un préstamo.»</blockquote>
+        <footer><span class="avatar">JC</span><div>Jesús C.<small>Propietario</small></div></footer>
+      </article>
+      <article class="review">
+        <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
+        <blockquote>«En todo el proceso me he sentido acompañada e informada de las condiciones. Todo muy claro, y en un momento en el que realmente lo necesitaba.»</blockquote>
+        <footer><span class="avatar">DM</span><div>Diana M.<small>Propietaria</small></div></footer>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="block book" id="agenda">
+  <div class="wrap book-grid">
+    <div>
+      <h2>Agenda tu llamada con un asesor</h2>
+      <p class="lead">Responde 4 preguntas rápidas para que el asesor llegue a la llamada con tu caso ya estudiado.</p>
+      <ul class="book-points">
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8FC0FF" stroke-width="3"><path d="M5 12l5 5 9-10"/></svg>Te decimos cuánto podrías recibir según tu renta</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8FC0FF" stroke-width="3"><path d="M5 12l5 5 9-10"/></svg>Resolvemos tus dudas sobre impagos, venta o cancelación</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8FC0FF" stroke-width="3"><path d="M5 12l5 5 9-10"/></svg>Sin compromiso y sin coste para ti</li>
+      </ul>
+      <div class="agent">
+        <img src="assets/agent.jpg" alt="">
+        <p><strong>Te llamará un asesor del equipo</strong>A la hora que elijas, desde el 722 833 511.</p>
+      </div>
+    </div>
+
+    <div class="form" id="form" aria-live="polite">
+      <div class="form-head"><span id="stepTxt">Paso 1 de 6</span><span>Menos de 1 minuto</span></div>
+      <div class="bar"><i id="bar"></i></div>
+
+      <div class="q active" data-q="propiedad">
+        <h3>¿Tienes un inmueble alquilado ahora mismo?</h3>
+        <p class="hint">Rental Advance trabaja con inmuebles que ya tienen inquilino.</p>
+        <div class="opts">
+          <button class="opt" data-v="Sí, con contrato en vigor"><span class="k">A</span><span>Sí, con contrato en vigor</span></button>
+          <button class="opt" data-v="Sí, pero el inquilino se retrasa" ><span class="k">B</span><span>Sí, pero el inquilino a veces se retrasa</span></button>
+          <button class="opt" data-v="No" data-disq="1"><span class="k">C</span><span>No, está vacío o no tengo inmueble</span></button>
+        </div>
+      </div>
+
+      <div class="q" data-q="renta">
+        <h3>¿Cuánto cobras de alquiler al mes?</h3>
+        <p class="hint">Si tienes varios inmuebles, suma las rentas.</p>
+        <div class="opts">
+          <button class="opt" data-v="Menos de 600 €"><span class="k">A</span><span>Menos de 600 €</span></button>
+          <button class="opt" data-v="600 – 1.000 €"><span class="k">B</span><span>Entre 600 y 1.000 €</span></button>
+          <button class="opt" data-v="1.000 – 2.000 €"><span class="k">C</span><span>Entre 1.000 y 2.000 €</span></button>
+          <button class="opt" data-v="Más de 2.000 €"><span class="k">D</span><span>Más de 2.000 €</span></button>
+        </div>
+      </div>
+
+      <div class="q" data-q="inmuebles">
+        <h3>¿Cuántos inmuebles tienes alquilados?</h3>
+        <p class="hint">Viviendas, locales, naves u oficinas.</p>
+        <div class="opts">
+          <button class="opt" data-v="1"><span class="k">A</span><span>1 inmueble</span></button>
+          <button class="opt" data-v="2"><span class="k">B</span><span>2 inmuebles</span></button>
+          <button class="opt" data-v="3 o más"><span class="k">C</span><span>3 o más</span></button>
+        </div>
+      </div>
+
+      <div class="q" data-q="plazo">
+        <h3>¿Cuándo te gustaría tener el dinero?</h3>
+        <p class="hint">Nos ayuda a priorizar tu llamada.</p>
+        <div class="opts">
+          <button class="opt" data-v="Lo antes posible"><span class="k">A</span><span>Lo antes posible<small>Tengo un proyecto o gasto concreto</small></span></button>
+          <button class="opt" data-v="En 1 a 3 meses"><span class="k">B</span><span>En los próximos 1 a 3 meses</span></button>
+          <button class="opt" data-v="Solo me informo"><span class="k">C</span><span>Todavía me estoy informando</span></button>
+        </div>
+      </div>
+
+      <div class="q" data-q="datos">
+        <h3>¿A quién llamamos?</h3>
+        <p class="hint">Solo usaremos tus datos para esta llamada.</p>
+        <div class="fields">
+          <label class="f full">Nombre y apellidos<input id="fName" autocomplete="name" placeholder="Ej. Laura Gómez"></label>
+          <label class="f">Teléfono<input id="fPhone" type="tel" autocomplete="tel" placeholder="600 000 000"></label>
+          <label class="f">Código postal del inmueble<input id="fCp" inputmode="numeric" maxlength="5" placeholder="28036"></label>
+          <label class="f full">Email<input id="fMail" type="email" autocomplete="email" placeholder="tu@email.com"></label>
+        </div>
+        <label class="check"><input type="checkbox" id="fOk">Acepto la política de privacidad y que Rental Advance me contacte por teléfono.</label>
+      </div>
+
+      <div class="q" data-q="hora">
+        <h3>Elige día y hora para tu llamada</h3>
+        <p class="hint">Hora peninsular. Dura unos 15 minutos.</p>
+        <div class="days" id="days"></div>
+        <div class="slots" id="slots"></div>
+      </div>
+
+      <div class="q" data-q="fin" id="fin">
+        <div class="done">
+          <div class="big"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5 9-10"/></svg></div>
+          <h3>Llamada agendada</h3>
+          <p id="finTxt">Te llamaremos en la hora elegida.</p>
+          <div class="summary" id="summary"></div>
+        </div>
+      </div>
+
+      <div class="q" data-q="nofit" id="nofit">
+        <div class="done">
+          <h3>Ahora mismo no podemos adelantarte rentas</h3>
+          <p>Rental Advance funciona con inmuebles que ya están alquilados. Cuando tengas inquilino, vuelve aquí y lo estudiamos en una llamada.</p>
+          <button class="back" id="restart" style="color:var(--blue); font-weight:700">Cambiar mi respuesta</button>
+        </div>
+      </div>
+
+      <p class="err" id="err" role="alert"></p>
+      <div class="nav" id="nav">
+        <button class="back" id="back" hidden>← Atrás</button>
+        <button class="cta" id="next">Continuar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="narrow faq">
+    <h2>Preguntas frecuentes</h2>
+    <details><summary>¿Estoy pidiendo un préstamo?</summary><p>No. Es un adelanto de tus propias rentas, no un producto de deuda. No pagas cuotas ni aparece en tu CIRBE.</p></details>
+    <details><summary>¿Qué pasa si el inquilino deja de pagar?</summary><p>Contamos con un seguro de impago que cubre el 100% de las rentas impagadas durante 12 meses. Nosotros gestionamos la reclamación y, si es necesario, el desahucio.</p></details>
+    <details><summary>¿Y si el inquilino se marcha?</summary><p>Nos encargamos de buscar un nuevo inquilino solvente y de toda la recomercialización del inmueble.</p></details>
+    <details><summary>¿Puedo pedir menos de 60 meses?</summary><p>Sí. El anticipo se adapta a lo que necesites como propietario.</p></details>
+    <details><summary>¿Puedo vender el inmueble mientras lo gestionáis?</summary><p>Sí. Solo tienes que avisarnos para coordinar la transferencia del acuerdo.</p></details>
+    <details><summary>¿Cuánto tardo en recibir el dinero?</summary><p>Una vez verificada la documentación y firmado el contrato, el anticipo llega normalmente en pocos días.</p></details>
+  </div>
+  <div class="center" style="margin-top:48px">
+    <a class="cta" href="#agenda">Agenda tu llamada</a>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>© 2026 Rental Advance. Avda. de Burgos 14, Madrid</span>
+    <nav><a href="https://rentaladvance.es/aviso-legal/">Aviso legal</a><a href="https://rentaladvance.es/politica-privacidad/">Privacidad</a><a href="https://rentaladvance.es/politica-de-cookies/">Cookies</a></nav>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky"><a class="cta" href="#agenda">Agenda tu llamada</a></div>
+
+<script>
+(function(){
+  // ---- Video ----
+  const v = document.getElementById('vsl'), cover = document.getElementById('playCover'), prog = document.getElementById('prog');
+  cover.addEventListener('click', () => { cover.remove(); v.controls = true; v.play(); });
+  v.addEventListener('timeupdate', () => { if (v.duration) prog.style.width = (v.currentTime / v.duration * 100) + '%'; });
+  v.addEventListener('ended', () => document.getElementById('agenda').scrollIntoView());
+
+  // ---- Sticky CTA (mobile) ----
+  const sticky = document.getElementById('sticky'), heroCta = document.querySelector('.hero-cta'), agenda = document.getElementById('agenda');
+  addEventListener('scroll', () => {
+    const pastHero = heroCta.getBoundingClientRect().bottom < 0;
+    const r = agenda.getBoundingClientRect(); const inForm = r.top < innerHeight && r.bottom > 0;
+    sticky.classList.toggle('show', pastHero && !inForm);
+  }, {passive:true});
+
+  // ---- Form ----
+  const qs = [...document.querySelectorAll('.q')].filter(q => !['fin','nofit'].includes(q.dataset.q));
+  const total = qs.length;
+  let i = 0; const ans = {};
+  const bar = document.getElementById('bar'), stepTxt = document.getElementById('stepTxt'), err = document.getElementById('err');
+  const next = document.getElementById('next'), back = document.getElementById('back'), nav = document.getElementById('nav');
+
+  function show(n){
+    document.querySelectorAll('.q').forEach(q => q.classList.remove('active'));
+    qs[n].classList.add('active'); i = n; err.textContent = '';
+    bar.style.width = ((n + 1) / (total + 1) * 100) + '%';
+    stepTxt.textContent = 'Paso ' + (n + 1) + ' de ' + total;
+    back.hidden = n === 0; nav.style.display = 'flex';
+    next.textContent = n === total - 1 ? 'Confirmar llamada' : 'Continuar';
+  }
+  function end(id){
+    document.querySelectorAll('.q').forEach(q => q.classList.remove('active'));
+    document.getElementById(id).classList.add('active'); nav.style.display = 'none'; err.textContent = '';
+    bar.style.width = '100%'; stepTxt.textContent = id === 'fin' ? 'Completado' : '';
+  }
+
+  document.querySelectorAll('.opts').forEach(g => g.addEventListener('click', e => {
+    const b = e.target.closest('.opt'); if (!b) return;
+    g.querySelectorAll('.opt').forEach(o => o.setAttribute('aria-pressed', 'false'));
+    b.setAttribute('aria-pressed', 'true');
+    const key = b.closest('.q').dataset.q; ans[key] = b.dataset.v;
+    if (b.dataset.disq) { setTimeout(() => end('nofit'), 250); return; }
+    setTimeout(() => show(i + 1), 250);
+  }));
+  document.querySelectorAll('.opt').forEach(o => o.setAttribute('aria-pressed', 'false'));
+
+  document.getElementById('restart').addEventListener('click', () => show(0));
+  back.addEventListener('click', () => i > 0 && show(i - 1));
+
+  next.addEventListener('click', () => {
+    const key = qs[i].dataset.q;
+    if (['propiedad','renta','inmuebles','plazo'].includes(key) && !ans[key]) { err.textContent = 'Elige una opción para continuar.'; return; }
+    if (key === 'datos') {
+      const n = fName.value.trim(), p = fPhone.value.replace(/\s/g,''), c = fCp.value.trim(), m = fMail.value.trim();
+      if (n.length < 3) return err.textContent = 'Escribe tu nombre y apellidos.';
+      if (!/^[6789]\d{8}$/.test(p.replace(/^\+34/,''))) return err.textContent = 'Revisa el teléfono: deben ser 9 dígitos.';
+      if (!/^\d{5}$/.test(c)) return err.textContent = 'El código postal debe tener 5 dígitos.';
+      if (!/^\S+@\S+\.\S+$/.test(m)) return err.textContent = 'Revisa el email.';
+      if (!fOk.checked) return err.textContent = 'Acepta la política de privacidad para continuar.';
+      Object.assign(ans, {nombre:n, telefono:p, cp:c, email:m});
+    }
+    if (key === 'hora') {
+      if (!ans.dia || !ans.slot) return err.textContent = 'Elige un día y una hora.';
+      const first = ans.nombre.split(' ')[0];
+      document.getElementById('finTxt').textContent = first + ', te llamaremos al ' + ans.telefono + ' el ' + ans.dia + ' a las ' + ans.slot + '. Te hemos enviado la confirmación a ' + ans.email + '.';
+      document.getElementById('summary').innerHTML =
+        '<div><span>Renta mensual</span><b>' + ans.renta + '</b></div>' +
+        '<div><span>Inmuebles</span><b>' + ans.inmuebles + '</b></div>' +
+        '<div><span>Plazo</span><b>' + ans.plazo + '</b></div>';
+      return end('fin');
+    }
+    show(i + 1);
+  });
+
+  // calendar
+  const daysEl = document.getElementById('days'), slotsEl = document.getElementById('slots');
+  const dn = ['dom','lun','mar','mié','jue','vie','sáb'], mn = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  const hours = ['10:00','10:30','11:30','12:00','13:00','16:00','17:00','18:30'];
+  const d = new Date(); let added = 0;
+  while (added < 5) {
+    d.setDate(d.getDate() + 1);
+    if (d.getDay() === 0 || d.getDay() === 6) continue;
+    const b = document.createElement('button'); b.className = 'day'; b.type = 'button';
+    b.innerHTML = '<small>' + dn[d.getDay()] + '</small><b>' + d.getDate() + '</b><small>' + mn[d.getMonth()] + '</small>';
+    const label = dn[d.getDay()] + ' ' + d.getDate() + ' de ' + mn[d.getMonth()];
+    const seed = d.getDate();
+    b.addEventListener('click', () => {
+      daysEl.querySelectorAll('.day').forEach(x => x.setAttribute('aria-pressed','false')); b.setAttribute('aria-pressed','true');
+      ans.dia = label; ans.slot = null; slotsEl.innerHTML = '';
+      hours.forEach((h, k) => {
+        const s = document.createElement('button'); s.className = 'slot'; s.type = 'button'; s.textContent = h;
+        s.disabled = (k * 7 + seed) % 5 === 0;
+        s.addEventListener('click', () => { slotsEl.querySelectorAll('.slot').forEach(x => x.setAttribute('aria-pressed','false')); s.setAttribute('aria-pressed','true'); ans.slot = h; err.textContent=''; });
+        slotsEl.appendChild(s);
+      });
+    });
+    daysEl.appendChild(b); added++;
+  }
+  daysEl.firstChild.click();
+
+  show(0);
+})();
+</script>
+</body>
+</html>
